@@ -6,8 +6,29 @@
         <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
         <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
         <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
+
+        <link rel="stylesheet" href="style/main.css">
     </head>
     <body>
+        <div id="map-selector-container" class="container">
+            <div class="content">
+                <div class="circle-container">
+                    <img src="assets/map.svg" alt="map">
+                </div>
+                <p>
+                    Select map as .zip
+                </p>
+                <button>
+                    Select
+                </button>
+            </div>
+        </div>
+        <div id="map-applyer-container" class="container">
+            <div class="content">
+                <p>Minecraft folder: <span id="minecraft-path"></span></p>
+            </div>
+        </div>
+
         <script src="./dist/renderer.js"></script>
     </body>
 </html>

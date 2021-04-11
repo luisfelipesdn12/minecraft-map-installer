@@ -8,15 +8,18 @@
     "scripts": {
         "build": "tsc",
         "watch": "tsc -w",
-        "lint": "eslint -c .eslintrc --ext .ts ./src",
+        "lint": "eslint -c .eslintrc.yml --ext .ts ./src",
+        "lint:fix": "eslint -c .eslintrc.yml --ext .ts ./src --fix",
         "start": "npm run build && electron ./dist/main.js"
     },
     "devDependencies": {
-        "@typescript-eslint/eslint-plugin": "^3.4.0",
-        "@typescript-eslint/parser": "^3.4.0",
+        "@typescript-eslint/eslint-plugin": "^4.21.0",
+        "@typescript-eslint/parser": "^4.21.0",
         "electron": "^9.4.0",
         "eslint": "^7.3.1",
         "typescript": "^3.9.5"
     },
-    "dependencies": {}
+    "dependencies": {
+        "minecraft-path": "^1.0.0"
+    }
 }

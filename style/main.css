@@ -1,0 +1,90 @@
+@font-face {
+    font-family: "Open Sans";
+    font-weight: 300;
+    src: url(fonts/Open_Sans/OpenSans-Light.ttf);
+}
+
+@font-face {
+    font-family: "Open Sans";
+    font-weight: 400;
+    src: url(fonts/Open_Sans/OpenSans-Regular.ttf);
+}
+
+@font-face {
+    font-family: "Open Sans";
+    font-weight: 600;
+    src: url(fonts/Open_Sans/OpenSans-SemiBold.ttf);
+}
+
+@font-face {
+    font-family: "Open Sans";
+    font-weight: 700;
+    src: url(fonts/Open_Sans/OpenSans-Bold.ttf);
+}
+
+* {
+    text-align: center;
+    margin: 0;
+    font-family: "Open Sans", sans-serif;
+}
+
+p, h1, h4 {
+    color: #BFCED7;
+}
+
+p {
+    font-weight: 600;
+    margin: 1rem 0;
+}
+
+body {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+button {
+    border: 0;
+    width: 100%;
+    padding: 0.25rem;
+    color: white;
+    background-color: #3EA69B;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+.circle-container {
+    width: 10rem;
+    height: 10rem;
+    display: flex;
+    justify-content: center;
+    border-radius: 9999px;
+    background-color: #436071;
+}
+
+.circle-container > img {
+    --size: 65%;
+    transform: translateY(calc(100% - var(--size) - 10%));
+    width: var(--size);
+    height: var(--size);
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+#map-selector-container {
+    background-color: #151D22;
+    grid-column: 1;
+}
+
+.content {
+    margin: auto;
+}
+
+#map-applyer-container {
+    background-color: #436071;
+    grid-column: 2;
+}
