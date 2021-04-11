@@ -37,6 +37,19 @@ p {
     margin: 1rem 0;
 }
 
+p#selected-map {
+    display: none;
+    margin-top: 20rem;
+}
+
+a {
+    cursor: pointer;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 body {
     height: 100vh;
     display: grid;
@@ -45,7 +58,7 @@ body {
 
 button {
     border: 0;
-    width: 100%;
+    width: 10rem;
     padding: 0.25rem;
     color: white;
     background-color: #3EA69B;
@@ -57,6 +70,7 @@ button {
 .circle-container {
     width: 10rem;
     height: 10rem;
+    margin: auto;
     display: flex;
     justify-content: center;
     border-radius: 9999px;
