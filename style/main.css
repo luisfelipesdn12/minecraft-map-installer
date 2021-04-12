@@ -67,6 +67,10 @@ button {
     font-size: 2rem;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
 .circle-container {
     width: 10rem;
     height: 10rem;
