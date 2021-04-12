@@ -14,8 +14,13 @@ const dialogOptions: OpenDialogOptions = {
  * @returns The selected path string
  */
 export default function selectMinecraftFolder(): string {
-    const selectedMinecraftPath: string = remote.dialog.showOpenDialogSync(dialogOptions)[0];
-    replaceText('minecraft-path', selectedMinecraftPath);
+    const selectedItems: string[] = remote.dialog.showOpenDialogSync(dialogOptions);
+    let selectedMinecraftPath: string;
+
+    if (selectedItems) {
+        selectedMinecraftPath = selectedItems[0];
+        replaceText('minecraft-path', selectedMinecraftPath);
+    }
 
     return selectedMinecraftPath;
 }

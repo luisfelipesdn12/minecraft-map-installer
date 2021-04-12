@@ -21,29 +21,42 @@ window.addEventListener('DOMContentLoaded', () => {
      */
     const mapSelectorButton: HTMLElement = document.getElementById('map-selector-button');
     mapSelectorButton.onclick = () => {
-        selectedMapPath = selectMap();
-        dispatchEvent(minecraftMapSelectedEvent);
+        const selectMapReturn = selectMap();
 
-        // After the selection, the button
-        // disapeir and the selected map is
-        // shown.
-        mapSelectorButton.style.display = 'none';
-        document.getElementById('selected-map').style.display = 'initial';
-        document.getElementById('select-map-instruction').style.display = 'none';
+        // If the user selected something
+        if (selectMapReturn) {
+            selectedMapPath = selectMapReturn;
+            dispatchEvent(minecraftMapSelectedEvent);
+
+            // After the selection, the button
+            // disapeir and the selected map is
+            // shown.
+            mapSelectorButton.style.display = 'none';
+            document.getElementById('selected-map').style.display = 'initial';
+            document.getElementById('select-map-instruction').style.display = 'none';
+        }
     };
 
     // When the user clicks on path of
     // the selected map, they can change
     // the selection.
     document.getElementById('selected-map-path').onclick = () => {
-        selectedMapPath = selectMap();
-        dispatchEvent(minecraftMapSelectedEvent);
+        const selectMapReturn = selectMap();
+        // If the user selected something
+        if (selectMapReturn) {
+            selectedMapPath = selectMapReturn;
+            dispatchEvent(minecraftMapSelectedEvent);
+        }
     };
 
     document.getElementById('minecraft-path').onclick = () => {
-        selectedMinecraftPath = selectMinecraftFolder();
+        const selectMinecraftFolderReturn = selectMinecraftFolder();
+        // If the user selected something
+        if (selectMinecraftFolderReturn) {
+            selectedMinecraftPath = selectMinecraftFolderReturn;
+            alert(`${selectedMinecraftPath}/saves`);
+        }
 
-        alert(`${selectedMinecraftPath}/saves`);
     };
 
     addEventListener('MinecraftMapSelected', () => {
@@ -51,8 +64,6 @@ window.addEventListener('DOMContentLoaded', () => {
             file: selectedMapPath,
             storeEntries: true,
         });
-
-
 
         mapZipFileStream.on('ready', () => {
             looksLikeAMap(mapZipFileStream.entries())

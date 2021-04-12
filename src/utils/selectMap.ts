@@ -11,11 +11,17 @@ const dialogOptions: OpenDialogOptions = {
 /**
  * Opens dialog to select the map file
  * and returns the path.
- * @returns The selected path string
+ * @returns The selected path string or
+ * undefined if nothing was selected.
  */
-export default function selectMap(): string {
-    const selectedFilePath: string = remote.dialog.showOpenDialogSync(dialogOptions)[0];
-    replaceText('selected-map-path', selectedFilePath);
+export default function selectMap(): string | undefined {
+    const selectedItems: string[] = remote.dialog.showOpenDialogSync(dialogOptions);
+    let selectedFilePath: string;
+
+    if (selectedItems) {
+        selectedFilePath = selectedItems[0];
+        replaceText('selected-map-path', selectedFilePath);
+    }
 
     return selectedFilePath;
 }
