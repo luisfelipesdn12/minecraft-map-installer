@@ -1,13 +1,14 @@
+import fs from 'fs';
+import unzip from 'unzip-stream';
 import minecraftPath from 'minecraft-path';
-import StreamZip from 'node-stream-zip';
-import looksLikeAMap from './utils/looksLikeAMap';
+import extractMap from './utils/extractMap';
 import replaceText from './utils/replaceText';
 import selectMap from './utils/selectMap';
 import selectMinecraftFolder from './utils/selectMinecraftFolder';
 
 const minecraftMapSelectedEvent: Event = new Event('MinecraftMapSelected');
 
-let selectedMinecraftPath: string;
+let selectedMinecraftPath: string = minecraftPath();
 let selectedMapPath: string;
 
 // All of the Node.js APIs are available in the preload process.
@@ -49,28 +50,41 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // When the user clicks on path of
+    // the Minecraft path, they can
+    // change the selection.
     document.getElementById('minecraft-path').onclick = () => {
         const selectMinecraftFolderReturn = selectMinecraftFolder();
         // If the user selected something
         if (selectMinecraftFolderReturn) {
             selectedMinecraftPath = selectMinecraftFolderReturn;
-            alert(`${selectedMinecraftPath}/saves`);
         }
 
     };
 
+    document.getElementById('install-button').onclick = () => {
+        extractMap(selectedMapPath, selectedMinecraftPath);
+    };
+
     addEventListener('MinecraftMapSelected', () => {
-        const mapZipFileStream = new StreamZip({
-            file: selectedMapPath,
-            storeEntries: true,
-        });
+        document.getElementById('map-applyer-container').classList.remove('disabled');
 
-        mapZipFileStream.on('ready', () => {
-            looksLikeAMap(mapZipFileStream.entries())
-                ? alert('It looks like a map')
-                : alert('It does\'nt look like a map');
+        fs.createReadStream(selectedMapPath)
+            .pipe(unzip.Parse())
+            .on('entry', (entry) => {
+                const IS_MAP_ICON_PATTERN = /icon\.png$/;
+                const isMapIcon: boolean = entry.path.match(IS_MAP_ICON_PATTERN);
 
-            mapZipFileStream.close();
-        });
+                if (isMapIcon) {
+                    entry.pipe(fs.createWriteStream('./assets/map-icon.png'));
+                    dispatchEvent(new Event('MinecraftMapIconExtracted'));
+                } else {
+                    entry.autodrain();
+                }
+            });
+    });
+
+    addEventListener('MinecraftMapExtracted', () => {
+        alert('Map installed!');
     });
 });

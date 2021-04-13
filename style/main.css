@@ -93,6 +93,16 @@ button:hover {
     justify-content: center;
 }
 
+.container.disabled p {
+    color: #5C717D;
+}
+
+.container.disabled button {
+    cursor: default;
+    color: #75828A;
+    background-color: #5C717D;
+}
+
 #map-selector-container {
     background-color: #151D22;
     grid-column: 1;

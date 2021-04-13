@@ -20,7 +20,7 @@
         "typescript": "^3.9.5"
     },
     "dependencies": {
-        "minecraft-path": "^1.0.0",
-        "node-stream-zip": "^1.13.3"
+        "extract-zip": "^2.0.1",
+        "minecraft-path": "^1.0.0"
     }
 }
